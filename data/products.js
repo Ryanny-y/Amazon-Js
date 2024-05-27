@@ -1,4 +1,26 @@
-const products = [
+class Product {
+  // Product Properties
+  #id; #image; #name; #rating; #riceCents; #keywords;
+  
+  constructor(product) {
+    this.id = product.id;
+    this.image = product.image;
+    this.name = product.name
+    this.rating = product.rating;
+    this.priceCents = product.priceCents;
+    this.keywords = product.keywords;
+  }
+
+  getStarRating() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+
+  getRatingCount() {
+    return this.rating.count;
+  }
+}
+
+export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -657,4 +679,4 @@ const products = [
       "mens"
     ]
   }
-];
+].map(product => new Product(product))
