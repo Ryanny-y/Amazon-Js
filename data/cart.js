@@ -9,7 +9,8 @@ class Cart {
     } else {
       this.cartItems.push({
         productId,
-        quantity
+        quantity,
+        deliveryOption: '1'
       })
     }
     this.saveToStorage();
@@ -22,6 +23,12 @@ class Cart {
   calculateQuantity() {
     return this.cartItems.reduce((acc, cur) => acc + cur.quantity, 0);
   }
+  
+  removeFromCart(productId) {
+    this.cartItems = this.cartItems.filter(cartItem => productId !== cartItem.productId);
+    this.saveToStorage();
+  }
+
 }
 
 export const cart = new Cart();
