@@ -1,3 +1,5 @@
+import { cart } from '../data/cart.js';
+
 export const deliveryOptions = [
   {
     id: "1",
@@ -16,3 +18,8 @@ export const deliveryOptions = [
   }
 ]
 
+export function updateDeliveryOption(productId, newDeliveryOption) {
+  const matchingItem = cart.cartItems.find(cartItem => productId === cartItem.productId);
+  matchingItem.deliveryOption = newDeliveryOption;
+  cart.saveToStorage();
+}
