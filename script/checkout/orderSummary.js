@@ -56,7 +56,7 @@ export default function renderOrderSummary() {
       </div>
     </div>`
   });
-  
+
   document.querySelector('.js-order-summary').innerHTML = itemSummaryHTML;
 
   // CHECKOUT QUANTITY

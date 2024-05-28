@@ -1,5 +1,13 @@
 class Cart {
-  cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  cartItems;
+
+  constructor() {
+    this.loadFromStorage();
+  }
+
+  loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem('cart')) || []
+  }
 
   addToCart(productId, quantity) {
     const matchingItem = this.cartItems.find(cartItem => cartItem.productId === productId);
