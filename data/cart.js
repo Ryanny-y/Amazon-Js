@@ -30,6 +30,16 @@ class Cart {
     this.cartItems = this.cartItems.filter(cartItem => productId !== cartItem.productId);
     this.saveToStorage();
   }
+
+  updateQuantity(productId, newQuantity) {
+    if(newQuantity <= 0 ) {
+      alert('New Quantity should be greater than 0');
+      return;
+    }
+    const matchingItem = cart.cartItems.find(cartItem => cartItem.productId === productId);
+    matchingItem.quantity = newQuantity;
+    this.saveToStorage();
+  }
 };
 
 export const cart = new Cart();

@@ -1,3 +1,6 @@
+import { cart } from './cart.js';
+import dayjs from 'https://unpkg.com/dayjs@1.11.11/esm/index.js';
+
 export const deliveryOptions = [
   {
     deliveryOptionId: '1',
@@ -13,3 +16,16 @@ export const deliveryOptions = [
     priceCents: 999
   }
 ]
+
+export function updateDeliveryOption(productId, deliveryOptionId) {
+  const matchingItem = cart.cartItems.find(cartItem => cartItem.productId === productId);
+  matchingItem.deliveryOptionId = deliveryOptionId;
+  cart.saveToStorage();
+}
+
+export function deliveryDays(deliveryOption) {
+  const today = dayjs();
+  const deliveryDay = today.add(deliveryOption.deliveryDays, 'days');
+  const dayString = deliveryDay.format('dddd, MMMM D');
+  return dayString;
+}
