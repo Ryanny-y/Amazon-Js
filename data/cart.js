@@ -1,5 +1,13 @@
 class Cart {
-  cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  cartItems;
+
+  constructor() {
+    this.loadFromStorage();
+  }
+
+  loadFromStorage() {
+    this.cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  }
 
   saveToStorage() {
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
