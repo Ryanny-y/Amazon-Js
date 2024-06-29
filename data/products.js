@@ -46,7 +46,7 @@ class Clothing extends Product {
 export let products = [];
 
 export async function loadProductsFetch() {
-  const response = await fetch('https://supersimplebackend.dev/products');
+  const response = await fetch('https://  supersimplebackend.dev/products');
   const data = await response.json();
   products = await data.map(product => {
                     if(product.type === 'clothing') {
@@ -57,7 +57,7 @@ export async function loadProductsFetch() {
 
   console.log('load products');
 
-  // return fetch('https://supersimplebackend.dev/products')
+  // return fetch('https://error.supersimplebackend.dev/products')
   // .then(response => response.json())
   // .then(data => {
   //   products = data.map(product => {
@@ -67,10 +67,12 @@ export async function loadProductsFetch() {
   //     return new Product(product)
   //   });
   //   console.log('load products');
+  // }).catch((error) => {
+  //   console.log('this is an error');
   // });
 };
 
-/* export function loadProducts(func) {
+export function loadProducts(func) {
   const xhr = new XMLHttpRequest;
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.addEventListener('load', () => {
@@ -83,9 +85,13 @@ export async function loadProductsFetch() {
     console.log('load products');
     func();
   });
+
+  xhr.addEventListener('error', (error) => {
+    console.log('this is an error.');
+  })
+
   xhr.send();
 }
-*/
 
 /*
 export const products = [

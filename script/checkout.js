@@ -5,15 +5,20 @@ import { loadCart } from "../data/cart.js";
 
 async function loadPage() {
 
-  await loadProductsFetch();
-  await new Promise((resolve) => {
-    loadCart(() => {
-      resolve();
+  try {
+    await loadProductsFetch();
+    await new Promise((resolve, reject) => {
+      loadCart(() => {
+        resolve();
+      })
     })
-  })
 
-  renderOrderSummary();
-  renderPaymentSummary();
+    renderOrderSummary();
+    renderPaymentSummary();
+  } catch (error) {
+    console.log('this is an error');
+  }
+
 }
 
 loadPage();
