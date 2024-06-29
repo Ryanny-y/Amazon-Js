@@ -1,7 +1,7 @@
 import { renderOrderSummary } from '../../../script/checkout/orderSummary.js';
 import { cart } from '../../../data/cart.js';
 import { formatCurrency } from '../../../script/utils/money.js';
-import { loadProducts, loadProductsFetch } from '../../../data/products.js';
+import { loadProductsFetch } from '../../../data/products.js';
 
 describe('Test suite: renderOrderSummary', () => {
 

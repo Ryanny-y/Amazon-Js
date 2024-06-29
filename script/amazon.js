@@ -1,10 +1,8 @@
-import { products, loadProducts } from "../data/products.js";
+import { products, loadProductsFetch } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import { cart } from "../data/cart.js";
 
-loadProducts(() => {
-  renderAmazonHTML();
-});
+loadProductsFetch().then(() => renderAmazonHTML())
 
 function renderAmazonHTML() {
 
