@@ -1,14 +1,12 @@
 import { renderOrderSummary } from '../../../script/checkout/orderSummary.js';
 import { cart } from '../../../data/cart.js';
 import { formatCurrency } from '../../../script/utils/money.js';
-import { loadProducts } from '../../../data/products.js';
+import { loadProducts, loadProductsFetch } from '../../../data/products.js';
 
 describe('Test suite: renderOrderSummary', () => {
 
   beforeAll((done) => {
-    loadProducts(() => {
-      done();
-    });
+    loadProductsFetch().then(() => done());
   });
 
   const productId1 = "3ebe75dc-64d2-4137-8860-1f5a963e534b";
