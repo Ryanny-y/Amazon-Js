@@ -48,6 +48,17 @@ class Cart {
     matchingItem.quantity = newQuantity;
     this.saveToStorage();
   }
+  
 };
+
+export function loadCart(func) {
+  const xhr = new XMLHttpRequest;
+  xhr.open('GET', 'https://supersimplebackend.dev/cart');
+  xhr.addEventListener('load', () => {
+    console.log(xhr.response);
+    func();
+  });
+  xhr.send();
+}
 
 export const cart = new Cart();
