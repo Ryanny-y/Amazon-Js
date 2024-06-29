@@ -1,5 +1,6 @@
 import { renderOrderSummary } from '../../../script/checkout/orderSummary.js';
 import { cart } from '../../../data/cart.js';
+import { formatCurrency } from '../../../script/utils/money.js';
 
 describe('Test suite: renderOrderSummary', () => {
 
@@ -41,6 +42,10 @@ describe('Test suite: renderOrderSummary', () => {
     expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(2);
     expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toContain('Quantity: 1');
     expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain('Quantity: 2');
+    expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toEqual('6 Piece White Dinner Plate Set');
+    expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toEqual('6-Piece Nonstick, Carbon Steel Oven Bakeware Baking Set');
+    expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual(`$${formatCurrency(2067)}`)
+    expect(document.querySelector(`.js-product-price-${productId2}`).innerText).toEqual(`$${formatCurrency(3499)}`)
   }); 
 
   it('removes a product', () => {
