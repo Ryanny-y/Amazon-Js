@@ -1,6 +1,10 @@
-import { products } from "../data/products.js";
+import { products, loadProducts } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import { cart } from "../data/cart.js";
+
+loadProducts(() => {
+  renderAmazonHTML();
+});
 
 function renderAmazonHTML() {
 
@@ -93,4 +97,4 @@ function displayCartQuantity(el, quan) {
   el.innerText = quan;
 }
 
-renderAmazonHTML();
+// renderAmazonHTML();
