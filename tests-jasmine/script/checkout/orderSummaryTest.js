@@ -1,8 +1,15 @@
 import { renderOrderSummary } from '../../../script/checkout/orderSummary.js';
 import { cart } from '../../../data/cart.js';
 import { formatCurrency } from '../../../script/utils/money.js';
+import { loadProducts } from '../../../data/products.js';
 
 describe('Test suite: renderOrderSummary', () => {
+
+  beforeAll((done) => {
+    loadProducts(() => {
+      done();
+    });
+  });
 
   const productId1 = "3ebe75dc-64d2-4137-8860-1f5a963e534b";
   const productId2 = "8c9c52b5-5a19-4bcb-a5d1-158a74287c53";
