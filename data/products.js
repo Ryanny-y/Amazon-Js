@@ -46,7 +46,7 @@ class Clothing extends Product {
 export let products = [];
 
 export async function loadProductsFetch() {
-  const response = await fetch('https://  supersimplebackend.dev/products');
+  const response = await fetch('https://supersimplebackend.dev/products');
   const data = await response.json();
   products = await data.map(product => {
                     if(product.type === 'clothing') {
