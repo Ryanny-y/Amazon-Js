@@ -42,6 +42,8 @@ function renderAmazonHTML() {
       </select>
     </div>
 
+    ${product.getSizeChartLink()}
+
     <div class="product-spacer"></div>
 
     <div class="added-to-cart js-added-to-cart-${product.id}">
