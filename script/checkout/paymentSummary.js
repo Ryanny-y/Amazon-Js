@@ -3,6 +3,7 @@ import { cart } from "../../data/cart.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
 import { formatCurrency } from '../utils/money.js';
 import { orders } from "../../data/orders.js";
+import { renderOrderSummary } from './orderSummary.js';
 
 export function renderPaymentSummary() {
   let productPriceCents = 0;
@@ -71,7 +72,9 @@ export function renderPaymentSummary() {
       });
       const order = await response.json();
       orders.addOrder(order);
-      console.log(orders.orders);
+      cart.clearCart();
+      renderOrderSummary();
+      renderPaymentSummary();
     } catch(err) {
       console.log(err);
     }

@@ -56,20 +56,6 @@ export async function loadProductsFetch() {
                   }); 
 
   console.log('load products');
-
-  // return fetch('https://error.supersimplebackend.dev/products')
-  // .then(response => response.json())
-  // .then(data => {
-  //   products = data.map(product => {
-  //     if(product.type === 'clothing') {
-  //       return new Clothing(product);
-  //     }
-  //     return new Product(product)
-  //   });
-  //   console.log('load products');
-  // }).catch((error) => {
-  //   console.log('this is an error');
-  // });
 };
 
 // export function loadProducts(func) {

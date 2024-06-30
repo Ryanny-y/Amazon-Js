@@ -12,26 +12,11 @@ async function loadPage() {
         resolve();
       })
     })
-
     renderOrderSummary();
     renderPaymentSummary();
   } catch (error) {
     console.log('this is an error');
   }
-
 }
 
 loadPage();
-
-
-/*Promise.all([
-  loadProductsFetch(),
-  new Promise((resolve) => {
-    loadCart(() => {
-      resolve();
-    })
-  })
-]).then(() => {
-  renderOrderSummary();
-  renderPaymentSummary();
-});*/

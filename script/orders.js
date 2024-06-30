@@ -1,20 +1,20 @@
 import { orders } from '../data/orders.js';
 import { formatCurrency } from './utils/money.js';
 import { loadProductsFetch, products } from '../data/products.js';
+import { cart } from '../data/cart.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.11/esm/index.js';
 
 async function loadPage() {
   await loadProductsFetch();
-  renderOrdersHTML();
+  renderOrders();
 }
 
 loadPage();
 
-function renderOrdersHTML() {
+function renderOrders() {
 
   const ordersHTML = orders.orders.map(order => {
     const orderDate = new dayjs(order.orderTime).format('MMMM D');
-
     return `
     <div class="order-container">
       
@@ -37,13 +37,13 @@ function renderOrdersHTML() {
       </div>
 
       <div class="order-details-grid">
-        ${productDetails(order.products)}
+        ${productDetails(order.products, order.id)}
       </div>
     </div>
     `
   }).join('');
 
-  function productDetails(orderItems) {
+  function productDetails(orderItems, orderId ) {
     return orderItems.map(item => {
       const { productId } = item;
       const matchingProduct = products.find(product => product.id === productId);
@@ -64,14 +64,14 @@ function renderOrdersHTML() {
           <div class="product-quantity">
             Quantity: ${item.quantity}
           </div>
-          <button class="buy-again-button button-primary">
+          <button class="buy-again-button button-primary" data-product-id="${productId}">
             <img class="buy-again-icon" src="images/icons/buy-again.png">
             <span class="buy-again-message">Buy it again</span>
           </button>
         </div>
 
         <div class="product-actions">
-          <a href="tracking.html?orderId=${productId}&productId=${matchingProduct.id}">
+          <a href="tracking.html?orderId=${orderId}&productId=${matchingProduct.id}">
             <button class="track-package-button button-secondary">
               Track package
             </button>
@@ -82,6 +82,15 @@ function renderOrdersHTML() {
   };
 
   document.querySelector('.js-order-grid').innerHTML = ordersHTML;
-  document.querySelector('.cart-quantity').innerText = orders.calculateOrderQuantity();
+  document.querySelector('.cart-quantity').innerText = cart.calculateQuantity();
 
+  const buyAgainBtns = document.querySelectorAll('.buy-again-button');
+  buyAgainBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const { productId } = btn.dataset;
+      cart.addToCart(productId, 1);
+      renderOrders();
+    });
+  })
+  
 }

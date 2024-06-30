@@ -48,6 +48,11 @@ class Cart {
     matchingItem.quantity = newQuantity;
     this.saveToStorage();
   }
+
+  clearCart() {
+    this.cartItems = [];
+    this.saveToStorage();
+  }
   
 };
 
