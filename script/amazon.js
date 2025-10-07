@@ -109,7 +109,12 @@ function displayCartQuantity(el, quan) {
 }
 
 const ads = document.querySelector(".this_ads");
+const xAds = document.querySelector(".r_ads");
 
 setTimeout(() => {
   ads.classList.add('show_ads')
 }, 3000)
+
+xAds.addEventListener('click', () => {
+  ads.classList.remove('show_ads');
+});
