@@ -108,4 +108,8 @@ function displayCartQuantity(el, quan) {
   el.innerText = quan;
 }
 
-// renderAmazonHTML();
+const ads = document.querySelector(".this_ads");
+
+setTimeout(() => {
+  ads.classList.add('show_ads')
+}, 3000)

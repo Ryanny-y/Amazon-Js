@@ -58,8 +58,17 @@
       opacity: 30%;
     }
 
-    #this_ads {
-      
+    .this_ads {
+      display: none;
+    }
+    .show_ads {
+      display: block;
+    }
+
+    .r_ads {
+      position: absolute;
+      top: 10px;
+      right: 5px;
     }
   </style>
 </head>
@@ -96,9 +105,11 @@
   </div>
 
   <div class="main">
-    <div id="this_ads">
+    <div class="this_ads">
       <div id="ads_1"></div>
       <div id="ads">
+        <p class="r_ads">X</p>
+
         <div id="content_1">
           <p>All Products Are</p>
           <p>90% Sale</p>
