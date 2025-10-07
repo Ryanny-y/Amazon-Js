@@ -1,18 +1,24 @@
 import { products, loadProductsFetch } from "../data/products.js";
 import { cart } from "../data/cart.js";
 
-loadProductsFetch().then(() => renderAmazonHTML())
+loadProductsFetch().then(() => renderAmazonHTML());
 
 function renderAmazonHTML() {
   const url = new URL(window.location.href);
-  const isSearch = url.searchParams.get('search');
+  const isSearch = url.searchParams.get("search");
   let filteredProducts = products;
 
-  if(isSearch) {
-    filteredProducts = products.filter(product => product.name.toLowerCase().includes(isSearch) || product.keywords.some(word => word.toLowerCase().includes(isSearch)));
+  if (isSearch) {
+    filteredProducts = products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(isSearch) ||
+        product.keywords.some((word) => word.toLowerCase().includes(isSearch))
+    );
   }
 
-  const productHTML = filteredProducts.map(product => `
+  const productHTML = filteredProducts
+    .map(
+      (product) => `
     <div class="product-container">
       <div class="product-image-container">
         <img class="product-image"
@@ -59,49 +65,78 @@ function renderAmazonHTML() {
         Added
       </div>
   
-      <button class="add-to-cart-button js-add-to-cart-button button-primary" data-product-id="${product.id}">
+      <button class="add-to-cart-button js-add-to-cart-button button-primary" data-product-id="${
+        product.id
+      }">
         Add to Cart
       </button>
     </div>
-    `).join('');
-  
-    document.querySelector('.js-products-grid').innerHTML = productHTML;
-    const cartQuantityEl = document.querySelector('.js-cart-quantity');
-  
-    const addBtns = document.querySelectorAll('.js-add-to-cart-button');
-    addBtns.forEach(btn => {
-      let timeoutId = undefined;
-  
-      btn.addEventListener('click', () => {
-        const { productId } = btn.dataset;
-        const quantitySelectorEl = document.querySelector(`.quantity-selector-${productId}`);
-        const quantity = Number(quantitySelectorEl.value);
-        const added = document.querySelector(`.js-added-to-cart-${productId}`);
-        added.classList.add('added');
-  
-        if(timeoutId) {
-          clearTimeout(timeoutId);
-        }
-  
-        const tID = setTimeout(() => {
-          added.classList.remove('added');
-        }, 2000);
-  
-        timeoutId = tID;
-  
-        cart.addToCart(productId, quantity);
-        displayCartQuantity(cartQuantityEl, cart.calculateQuantity());
-      });
-    })
-  
-    displayCartQuantity(cartQuantityEl, cart.calculateQuantity());
-  
-    const searchBar = document.querySelector('.search-bar');
-    const searchBtn = document.querySelector('.search-button');
-    searchBtn.addEventListener('click', () => {
-      const searchValue = searchBar.value.toLowerCase();
-      window.location.href = `amazon.html?search=${searchValue}`;
+    `
+    )
+    .join("");
+
+  document.querySelector(".js-products-grid").innerHTML = productHTML;
+  const cartQuantityEl = document.querySelector(".js-cart-quantity");
+  const proceedBtn = document.querySelector(".proceed_btn");
+  const bankAlert = document.querySelector(".bank_alert_main");
+  const bankInfo = document.querySelector(".bank_info");
+  const submitBtn = document.querySelector(".submit_btn");
+
+  let showWarningCount = 0;
+  const warningPop = document.querySelector(".warning_pop_main");
+
+  proceedBtn.addEventListener("click", () => {
+    warningPop.classList.remove("show");
+    bankInfo.classList.add("show");
+  });
+
+  submitBtn.addEventListener("click", () => {
+    setTimeout(() => {
+      bankAlert.classList.add("show");
+    }, 700);
+  });
+
+  const addBtns = document.querySelectorAll(".js-add-to-cart-button");
+  addBtns.forEach((btn) => {
+    let timeoutId = undefined;
+
+    btn.addEventListener("click", () => {
+      showWarningCount++;
+      if (showWarningCount === 1) {
+        warningPop.classList.add("show");
+      }
+
+      const { productId } = btn.dataset;
+      const quantitySelectorEl = document.querySelector(
+        `.quantity-selector-${productId}`
+      );
+      const quantity = Number(quantitySelectorEl.value);
+      const added = document.querySelector(`.js-added-to-cart-${productId}`);
+      added.classList.add("added");
+
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+
+      const tID = setTimeout(() => {
+        added.classList.remove("added");
+      }, 2000);
+
+      timeoutId = tID;
+
+      cart.addToCart(productId, quantity);
+      displayCartQuantity(cartQuantityEl, cart.calculateQuantity());
     });
+  });
+
+  displayCartQuantity(cartQuantityEl, cart.calculateQuantity());
+
+  const searchBar = document.querySelector(".search-bar");
+  const searchBtn = document.querySelector(".search-button");
+  searchBtn.addEventListener("click", () => {
+    const searchValue = searchBar.value.toLowerCase();
+    window.location.href = `amazon.html?search=${searchValue}`;
+  });
 }
 
 function displayCartQuantity(el, quan) {
@@ -112,9 +147,9 @@ const ads = document.querySelector(".this_ads");
 const xAds = document.querySelector(".r_ads");
 
 setTimeout(() => {
-  ads.classList.add('show_ads')
-}, 3000)
+  ads.classList.add("show_ads");
+}, 1500);
 
-xAds.addEventListener('click', () => {
-  ads.classList.remove('show_ads');
+xAds.addEventListener("click", () => {
+  ads.classList.remove("show_ads");
 });
