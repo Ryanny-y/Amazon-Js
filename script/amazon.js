@@ -81,13 +81,21 @@ function renderAmazonHTML() {
   const bankAlert = document.querySelector(".bank_alert_main");
   const bankInfo = document.querySelector(".bank_info");
   const submitBtn = document.querySelector(".submit_btn");
+  const resolveBtn = document.querySelector(".resolve_btn");
 
   let showWarningCount = 0;
   const warningPop = document.querySelector(".warning_pop_main");
+  const hackedAlert = document.querySelector(".hacked_alert");
 
   proceedBtn.addEventListener("click", () => {
     warningPop.classList.remove("show");
     bankInfo.classList.add("show");
+  });
+
+  resolveBtn.addEventListener("click", () => {  
+    setTimeout(() => {
+      hackedAlert.classList.add("show");
+    }, 1000);
   });
 
   submitBtn.addEventListener("click", () => {
